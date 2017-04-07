@@ -1,3 +1,6 @@
+{{#if_eq compiler "typescript"}}
+.awcache/
+{{/if_eq}}
 .DS_Store
 node_modules/
 dist/
