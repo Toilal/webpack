@@ -13,7 +13,7 @@ function resolve (dir) {
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
-const scriptLoadersOptions = {ts: {transpileOnly: isDevelopment}}
+const scriptLoadersOptions = {ts: {transpileOnly: isDevelopment, appendTsSuffixTo: [/\.vue$/]}}
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,

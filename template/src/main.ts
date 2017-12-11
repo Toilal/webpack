@@ -6,7 +6,7 @@ import Vue from 'vue'{{#if_eq tslintConfig "airbnb"}};{{/if_eq}}
 
 import './hooks'{{#if_eq tslintConfig "airbnb"}};{{/if_eq}} // This must be imported before any component
 
-import App from './App'{{#if_eq tslintConfig "airbnb"}};{{/if_eq}}
+import App from './App.vue'{{#if_eq tslintConfig "airbnb"}};{{/if_eq}}
 {{#router}}
 import router from './router'{{#if_eq tslintConfig "airbnb"}};{{/if_eq}}
 {{/router}}

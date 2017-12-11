@@ -39,8 +39,7 @@ module.exports = {
     {{#if_eq lintConfig "airbnb"}}
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
-      js: 'never',
-      vue: 'never'
+      js: 'never'
     }],
     // allow optionalDependencies
     'import/no-extraneous-dependencies': ['error', {
