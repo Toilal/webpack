@@ -121,7 +121,13 @@ exports.createNotifierCallback = () => {
 exports.buildExternalsFromDependencies = function() {
   const packageJson = require('../package.json');
   const externals = {};
-  for (var dependency in packageJson.dependencies) {
+  for (const dependency in packageJson.dependencies) {
+    externals[dependency] = dependency;
+  }
+  for (const dependency in packageJson.peerDependencies) {
+    externals[dependency] = dependency;
+  }
+  for (const dependency in packageJson.devDependencies) {
     externals[dependency] = dependency;
   }
   return externals;
