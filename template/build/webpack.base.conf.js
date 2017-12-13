@@ -15,7 +15,7 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 
 const scriptLoadersOptions = {ts: {transpileOnly: isDevelopment, appendTsSuffixTo: [/\.vue$/]}}
 
-const createLintingRule = () => ({
+{{#lint}}const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
   enforce: 'pre',
@@ -24,7 +24,19 @@ const createLintingRule = () => ({
     formatter: require('eslint-friendly-formatter'),
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
-})
+}){{/lint}}
+{{#tslint}}
+const createTsLintingRule = () => ({
+  test: /\.ts$/, // tslint doesn't support vue files
+  enforce: 'pre',
+  loader: 'tslint-loader',
+  include: [resolve('src'),{{#if_eq projectType "lib"}} resolve('app'),{{/if_eq}} resolve('test')],
+  options: {
+    formatter: 'grouped',
+    formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
+    typeCheck: true
+  }
+}){{/tslint}}
 
 module.exports = {
   context: path.resolve(__dirname, '../'),{{#unless_eq projectType "lib"}}
@@ -62,19 +74,8 @@ module.exports = {
     rules: [
       {{#lint}}
       ...(config.dev.useEslint ? [createLintingRule()] : []),
-      {{/lint}}
-      {{#tslint}}
-      {
-        test: /\.ts$/, // tslint doesn't support vue files
-        enforce: 'pre',
-        loader: 'tslint-loader',
-        include: [resolve('src'),{{#if_eq projectType "lib"}} resolve('app'),{{/if_eq}} resolve('test')],
-        options: {
-          formatter: 'grouped',
-          formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
-          typeCheck: true
-        }
-      },
+      {{/lint}}{{#tslint}}
+      ...(config.dev.useTslint ? [createTsLintingRule()] : []),
       {{/tslint}}
       {
         test: /\.vue$/,
