@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const toPascalCase = require('to-pascal-case')
 
 const env = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -31,7 +32,11 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsLibRoot,
-    library: '[name]',
+    library: {
+      root: toPascalCase("{{ name }}"),
+      amd: "{{ name }}",
+      commonjs: "{{ name }}"
+    },
     libraryTarget: 'umd',
     umdNamedDefine: true,
     publicPath: process.env.NODE_ENV === 'production'

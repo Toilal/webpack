@@ -1,7 +1,8 @@
 'use strict'
 const path = require('path')
 const config = require('../config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin'){{#if_eq projectType "lib"}}
+const toPascalCase = require('to-pascal-case'){{/if_eq}}
 const packageConfig = require('../package.json')
 
 exports.assetsPath = function (_path) {
@@ -118,19 +119,30 @@ exports.createNotifierCallback = () => {
 }
 
 {{#if_eq projectType "lib"}}
+function externalObject(dependency) {
+    return {
+      root: toPascalCase(dependency),
+      amd: dependency,
+      commonjs: dependency,
+      commonjs2: dependency
+    }
+}
+
 // Generate externals object from dependencies
 exports.buildExternalsFromDependencies = function() {
   const packageJson = require('../package.json');
   const externals = {};
+
   for (const dependency in packageJson.dependencies) {
-    externals[dependency] = dependency;
+    externals[dependency] = externalObject(dependency);
   }
   for (const dependency in packageJson.peerDependencies) {
-    externals[dependency] = dependency;
+    externals[dependency] = externalObject(dependency);
   }
   for (const dependency in packageJson.devDependencies) {
-    externals[dependency] = dependency;
+    externals[dependency] = externalObject(dependency);
   }
+
   return externals;
 }
 {{/if_eq}}
