@@ -2,16 +2,14 @@
 const webpack = require('webpack')
 const DevServer = require('webpack-dev-server')
 
-{{#unless_eq projectType "lib"}}process.env.NODE_ENV = 'test'
-
 const webpackConfig = require('../../build/webpack.prod.conf')
-{{/unless_eq}}const devConfigPromise = require('../../build/webpack.dev.conf')
+const devConfigPromise = require('../../build/webpack.dev.conf')
 
 let server
 
 devConfigPromise.then(devConfig => {
   const devServerOptions = devConfig.devServer
-  const compiler = webpack({{#if_eq projectType "lib"}}devConfig{{else}}webpackConfig{{/if_eq}})
+  const compiler = webpack(webpackConfig)
   server = new DevServer(compiler, devServerOptions)
   const port = devServerOptions.port
   const host = devServerOptions.host

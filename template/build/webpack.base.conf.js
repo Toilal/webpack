@@ -27,9 +27,9 @@ const createLintingRule = () => ({
 })
 
 module.exports = {
-  context: path.resolve(__dirname, '../'),{{#unless_eq projectType "lib"}}
+  context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.{{#if_eq compiler "typescript"}}ts{{else}}js{{/if_eq}}'
+    app: './{{#if_eq projectType "lib"}}app{{else}}src{{/if_eq}}/main.{{#if_eq compiler "typescript"}}ts{{else}}js{{/if_eq}}'
   },
   output: {
     path: config.build.assetsRoot,
@@ -37,7 +37,7 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
-  },{{/unless_eq}}
+  },
   resolve: {
     extensions: ['.vue', '.js', {{#if_eq compiler "typescript"}}'.ts', {{/if_eq}}'.json'],
     alias: {

@@ -4,7 +4,7 @@
   "description": "{{ description }}",
   "author": "{{ author }}",
   "private": true,{{#if_eq projectType "lib"}}
-  "main": "dist/{{ name }}.js",{{/if_eq}}
+  "main": "lib/{{ name }}.js",{{/if_eq}}
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -23,7 +23,7 @@
     {{#lint}}
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",{{/lint}}{{#tslint}}
     "tslint": "tslint -p . -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts'{{#unit}} 'test/unit/**/*.ts'{{/unit}}{{#e2e}} 'test/e2e/*.ts'{{/e2e}}",{{/tslint}}
-    "build": "node build/build.js"
+    "build": "node build/build{{#if_eq projectType "lib"}}.lib{{/if_eq}}.js{{#if_eq projectType "lib"}} && node build/build.js{{/if_eq}}"
   },
   "dependencies": {
     "vue": "^2.5.2"{{#classStyle}},

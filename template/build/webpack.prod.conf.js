@@ -16,9 +16,6 @@ const env = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
   : {{/if_or}}require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
-  {{#if_eq projectType "lib"}}entry: {
-    '{{ name }}': './src'
-  },{{/if_eq}}
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -28,24 +25,15 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
-    path: config.build.assetsRoot,{{#unless_eq projectType "lib"}}
+    path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
-    {{/unless_eq}}{{#if_eq projectType "lib"}}
-    library: '[name]',
-    libraryTarget: 'umd',
-    umdNamedDefine: true,
-    publicPath: process.env.NODE_ENV === 'production'
-    ? config.build.assetsPublicPath
-    : config.dev.assetsPublicPath
-    {{/if_eq}}
-  },{{#if_eq projectType "lib"}}
-  externals: utils.buildExternalsFromDependencies(),{{/if_eq}}
+  },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
-    }),{{#unless_eq projectType "lib"}}
+    }),
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
@@ -54,16 +42,16 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       sourceMap: config.build.productionSourceMap,
       parallel: true
-    }),{{/unless_eq}}
+    }),
     // extract css into its own file
     new ExtractTextPlugin({
-      filename: {{#unless_eq projectType "lib"}}utils.assetsPath('css/[name].[contenthash].css'){{/unless_eq}}{{#if_eq projectType "lib"}}'[name].css'{{/if_eq}},
+      filename: utils.assetsPath('css/[name].[contenthash].css'),
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
       // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
       // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
       allChunks: true,
-    }),{{#unless_eq projectType "lib"}}
+    }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({
@@ -122,7 +110,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       async: 'vendor-async',
       children: true,
       minChunks: 3
-    }),{{/unless_eq}}
+    }),
 
     // copy custom static assets
     new CopyWebpackPlugin([
@@ -157,35 +145,5 @@ if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
-{{#if_eq projectType "lib"}}
-const webpackMinifiedConfig = merge(webpackConfig, {
-  output: {
-    filename: '[name].min.js',
-    chunkFilename: '[id].min.js',
-  },
-  plugins: [
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false
-        }
-      },
-      sourceMap: config.build.productionSourceMap,
-      parallel: true
-    }),
-    // extract css into its own file
-    new ExtractTextPlugin({
-      filename: '[name].min.css'
-    }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: {
-        safe: true
-      }
-    })
-  ]
-})
 
-module.exports = [webpackConfig, webpackMinifiedConfig]{{else}}
-module.exports = webpackConfig{{/if_eq}}
+module.exports = webpackConfig

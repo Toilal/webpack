@@ -53,7 +53,8 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../dist'),{{#if_eq projectType "lib"}}
+    assetsLibRoot: path.resolve(__dirname, '../lib'),{{/if_eq}}
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 
