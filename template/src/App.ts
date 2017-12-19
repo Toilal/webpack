@@ -2,7 +2,7 @@ import Vue from 'vue'
 {{#classStyle}}import Component from 'vue-class-component'
 
 {{/classStyle}}
-{{#unless router}}import HelloWorld from './components/HelloWorld.vue'
+{{#unless router}}import HelloWorld from './components/HelloWorld'
 
 {{/unless}}
 {{#classStyle}}@Component{{#unless router}}({

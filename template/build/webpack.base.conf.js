@@ -11,10 +11,6 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const isDevelopment = process.env.NODE_ENV === 'development'
-
-const scriptLoadersOptions = {ts: {transpileOnly: isDevelopment, appendTsSuffixTo: [/\.vue$/]}}
-
 {{#lint}}const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
@@ -64,11 +60,11 @@ module.exports = {
     ]
   },{{#if_eq compiler "typescript"}}
   plugins: [
-    ...(isDevelopment? [
-      new ForkTsCheckerWebpackPlugin({
-        watch: {{#unless_eq projectType "lib"}}'./src'{{/unless_eq}}{{#if_eq projectType "lib"}}['./src', './app']{{/if_eq}} // optional but improves performance (less stat calls)
-      })
-    ] : [])
+    new ForkTsCheckerWebpackPlugin({
+      vue: true,{{#tslint}}
+      tslint: config.dev.useTslint,{{/tslint}}
+      watch: {{#unless_eq projectType "lib"}}'./src'{{/unless_eq}}{{#if_eq projectType "lib"}}['./src', './app']{{/if_eq}} // optional but improves performance (less stat calls)
+    })
   ],{{/if_eq}}
   module: {
     rules: [
@@ -84,13 +80,13 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: utils.scriptLoaders(scriptLoadersOptions).js,
+        use: utils.scriptLoaders(vueLoaderConfig.scriptLoadersOptions).js,
         include: [resolve('src'),{{#if_eq projectType "lib"}} resolve('app'),{{/if_eq}} resolve('test')]
       },
       {{#if_eq compiler "typescript"}}
       {
         test: /\.ts$/,
-        use: utils.scriptLoaders(scriptLoadersOptions).ts,
+        use: utils.scriptLoaders(vueLoaderConfig.scriptLoadersOptions).ts,
         include: [resolve('src'),{{#if_eq projectType "lib"}} resolve('app'),{{/if_eq}} resolve('test')]
       },
       {{/if_eq}}

@@ -2,14 +2,16 @@
 const utils = require('./utils')
 const config = require('../config')
 const isProduction = process.env.NODE_ENV === 'production'
-const isDevelopment = process.env.NODE_ENV === 'development'
 const sourceMapEnabled = isProduction
   ? config.build.productionSourceMap
   : config.dev.cssSourceMap
 
+const scriptLoadersOptions = {ts: {transpileOnly: true, appendTsSuffixTo: [/\.vue$/]}}
+
 module.exports = {
+  scriptLoadersOptions,
   loaders: Object.assign({},
-    utils.scriptLoaders({ts: {transpileOnly: isDevelopment}}),
+    utils.scriptLoaders(scriptLoadersOptions),
     utils.cssLoaders({
       sourceMap: sourceMapEnabled,
       extract: isProduction

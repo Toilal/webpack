@@ -136,7 +136,7 @@
     "ts-jest": "^21.2.3",
     {{/if_eq}}
     "ts-loader": "^2.0.3",
-    "fork-ts-checker-webpack-plugin": "^0.2.4",
+    "fork-ts-checker-webpack-plugin": "^0.3.0",
     {{/if_eq}}
     {{#tslint}}
     "tslint": "^5.4.3",
