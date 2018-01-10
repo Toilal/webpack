@@ -71,6 +71,27 @@ module.exports = {
       type: 'confirm',
       message: 'Install vue-router?'
     },
+    sfcExternals: {
+      type: 'checkbox',
+      message: 'Which tag do you want to externalize as standalone file from Single File Components ?',
+      choices: [
+        {
+          name: '<script>',
+          value: 'script',
+          short: 'script'
+        },
+        {
+          name: '<style>',
+          value: 'style',
+          short: 'style'
+        },
+        {
+          name: '<template>',
+          value: 'template',
+          short: 'template'
+        }
+      ]
+    },
     classStyle: {
       type: 'confirm',
       message: 'Use Class-Style Components (vue-class-component + vue-property-decorators)?',
@@ -206,7 +227,7 @@ module.exports = {
     'src/**/*.ts': "compiler == 'typescript'",
     'src/**/*.js': "compiler != 'typescript'",
     'config/test.env.js': 'unit || e2e',
-    'build/*.lib.*': "projectType == 'lib'",
+    '**/*.lib.*': "projectType == 'lib'",
     'build/webpack.test.conf.js': "unit && runner === 'karma'",
     'test/unit/specs/**/*.ts': "unit && compiler == 'typescript'",
     'test/unit/specs/**/*.js': "unit && compiler != 'typescript'",

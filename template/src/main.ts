@@ -7,7 +7,7 @@ import Vue from 'vue'
 import './hooks' // This must be imported before any component
 
 {{/classStyle}}
-import App from './App'
+import App from './App.vue'
 {{#router}}
 import router from './router'
 {{/router}}

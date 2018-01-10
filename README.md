@@ -7,10 +7,6 @@
 > This is a fork of official webpack template that brings more options, like TypeScript, Library, Class-Style 
 components ... 
 
-## Known issues with `.vue` files and TypeScript
-
-- [tslint doesn't support `.vue` files](https://github.com/palantir/tslint/issues/2099).
-
 ## Documentation
 
 - [For this template](http://toilal.github.io/vue-webpack-template): common questions specific to this template are answered and each part is described in greater detail

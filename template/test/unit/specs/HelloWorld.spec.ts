@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import HelloWorld from '@/components/HelloWorld'{{#if_eq runner "karma"}}
+import HelloWorld from '@/components/HelloWorld.vue'{{#if_eq runner "karma"}}
 import { expect } from 'chai'{{/if_eq}}
 
 describe('HelloWorld.vue', () => {
