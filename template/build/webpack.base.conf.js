@@ -12,7 +12,7 @@ function resolve (dir) {
 }
 
 {{#lint}}const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
+  test: /\.{{#if_eq compiler "es2015"}}(js|vue){{else}}js{{/if_eq}}$/,
   loader: 'eslint-loader',
   enforce: 'pre',
   include: [resolve('src'){{#if_eq projectType "lib"}}, resolve('app'){{/if_eq}}, resolve('test')],
@@ -81,13 +81,13 @@ module.exports = {
       {
         test: /\.js$/,
         use: utils.scriptLoaders(vueLoaderConfig.scriptLoadersOptions).js,
-        include: [resolve('src'),{{#if_eq projectType "lib"}} resolve('app'),{{/if_eq}} resolve('test')]
+        include: [resolve('src'),{{#if_eq projectType "lib"}} resolve('app'),{{/if_eq}} resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {{#if_eq compiler "typescript"}}
       {
         test: /\.ts$/,
         use: utils.scriptLoaders(vueLoaderConfig.scriptLoadersOptions).ts,
-        include: [resolve('src'),{{#if_eq projectType "lib"}} resolve('app'),{{/if_eq}} resolve('test')]
+        include: [resolve('src'),{{#if_eq projectType "lib"}} resolve('app'),{{/if_eq}} resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {{/if_eq}}
       {

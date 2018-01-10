@@ -1,5 +1,5 @@
 'use strict'
-// Template version: 1.2.6
+// Template version: {{ template_version }}
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
@@ -20,8 +20,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    {{#lint}}
-    // Use Eslint Loader?
+    {{#lint}}// Use Eslint Loader?
     // If true, your code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
     useEslint: true,
@@ -29,8 +28,7 @@ module.exports = {
     // in the browser.
     showEslintErrorsInOverlay: false,
     {{/lint}}
-    {{#tslint}}
-    // Use Tslint Loader?
+    {{#tslint}}// Use Tslint Loader?
     // If true, your typescript code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
     useTslint: true,
@@ -41,19 +39,14 @@ module.exports = {
      */
 
     // https://webpack.js.org/configuration/devtool/#development
-    devtool: 'eval-source-map',
+    devtool: 'cheap-module-eval-source-map',
 
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    // CSS Sourcemaps off by default because relative paths are "buggy"
-    // with this option, according to the CSS-Loader README
-    // (https://github.com/webpack/css-loader#sourcemaps)
-    // In our experience, they generally work as expected,
-    // just be aware of this issue when enabling this option.
-    cssSourceMap: false,
+    cssSourceMap: true,
   },
 
   build: {

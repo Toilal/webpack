@@ -21,35 +21,32 @@
 {{#if_eq compiler "typescript"}}<script lang="ts">
 import Vue from 'vue'
 {{#classStyle}}import Component from 'vue-class-component'
-
 {{/classStyle}}
 {{#unless router}}import HelloWorld from './components/HelloWorld.vue'
-
-{{/unless}}
-{{#classStyle}}@Component{{#unless router}}({
+{{/unless}}{{#classStyle}}
+@Component{{#unless router}}({
   components: { HelloWorld }
 }){{/unless}}
 export default class App extends Vue {
 
-}{{else}}export default Vue.extend({
+}{{else}}
+export default Vue.extend({
   name: 'app'{{#router}}{{else}},
   components: { HelloWorld }{{/router}}
 }){{/classStyle}}
 </script>{{/if_eq}}{{#if_eq compiler "es2015"}}<script>
 {{#classStyle}}import Vue from 'vue'
 import Component from 'vue-class-component'
-
 {{/classStyle}}
-{{#unless router}}
-import HelloWorld from './components/HelloWorld.vue'
-
-{{/unless}}
-{{#classStyle}}@Component{{#unless router}}({
+{{#unless router}}import HelloWorld from './components/HelloWorld.vue'
+{{/unless}}{{#classStyle}}
+@Component{{#unless router}}({
   components: { HelloWorld }
 }){{/unless}}
 export default class App extends Vue {
 
-}{{else}}export default {
+}{{else}}
+export default {
   name: 'app'{{#router}}{{else}},
   components: { HelloWorld }{{/router}}
 }{{/classStyle}}

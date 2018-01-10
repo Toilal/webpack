@@ -38,12 +38,12 @@ a {
 {{#if_eq compiler "typescript"}}<script lang="ts">
 import Vue from 'vue'
 {{#classStyle}}import Component from 'vue-class-component'
-
 {{/classStyle}}{{#classStyle}}
 @Component
 export default class HelloWorld extends Vue {
   msg = 'Welcome to Your Vue.js App'{{#if_eq tslintConfig "airbnb"}};{{/if_eq}}
-}{{else}}export default Vue.extend({
+}{{else}}
+export default Vue.extend({
   name: 'HelloWorld',
   data{{#if_eq tslintConfig "standard"}} {{/if_eq}}() {
     return {
@@ -54,12 +54,12 @@ export default class HelloWorld extends Vue {
 </script>{{/if_eq}}{{#if_eq compiler "es2015"}}<script>
 {{#classStyle}}import Vue from 'vue'
 import Component from 'vue-class-component'
-
 {{/classStyle}}{{#classStyle}}
 @Component
 export default class HelloWorld extends Vue {
   msg = 'Welcome to Your Vue.js App'
-}{{else}}export default {
+}{{else}}
+export default {
   name: 'HelloWorld',
   data() {
     return {
