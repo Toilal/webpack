@@ -39,7 +39,7 @@ a {
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import Dummy from '#/components/Dummy.vue'
+import Dummy from '#/app-components/Dummy.vue'
 
 @Component({
   components: { Dummy }

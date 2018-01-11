@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import './hooks' // This must be imported before any component
 
-import App from './App.vue'
+import App from '#/App.vue'
 
 Vue.config.productionTip = false
 
