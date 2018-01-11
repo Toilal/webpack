@@ -30,7 +30,7 @@ module.exports = {
     // Use Tslint Loader?
     // If true, your typescript code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
-    useTslint: false,
+    useTslint: true,
 
     /**
      * Source Maps
