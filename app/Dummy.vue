@@ -14,6 +14,6 @@ a = "string"
 
 @Component()
 export default class App extends Vue {
-  test: "abc"
+  test = "abc"
 }
 </script>
