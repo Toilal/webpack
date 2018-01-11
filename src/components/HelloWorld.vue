@@ -39,7 +39,11 @@ a {
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-@Component
+import Dummy from '#/components/Dummy.vue'
+
+@Component({
+  components: { Dummy }
+})
 export default class HelloWorld extends Vue {
   msg = 'Welcome to Your Vue.js App'
 }

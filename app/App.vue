@@ -18,10 +18,10 @@
 import Vue from 'vue';
 import Component from 'vue-class-component'
 
-import Dummy from '#/Dummy.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
 
 @Component({
-  components: { Dummy }
+  components: { HelloWorld }
 })
 export default class App extends Vue {
 
