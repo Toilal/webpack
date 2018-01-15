@@ -1,6 +1,7 @@
 const metalsmith = require('./metalsmith')
 const path = require('path')
 const fs = require('fs')
+
 const {
   sortDependencies,
   installDependencies,
@@ -12,9 +13,17 @@ const pkg = require('./package.json')
 
 const templateVersion = pkg.version
 
+const { addTestAnswers } = require('./scenarios')
+
 module.exports = {
+  metalsmith: {
+    // When running tests for the template, this adds answers for the selected scenario
+    before: addTestAnswers,
+    after: metalsmith
+  },
   helpers: {
     if_or(v1, v2, options) {
+
       if (v1 || v2) {
         return options.fn(this)
       }
@@ -25,24 +34,28 @@ module.exports = {
       return templateVersion
     },
   },
-
+  
   prompts: {
     name: {
+      when: 'isNotTest',
       type: 'string',
       required: true,
       message: 'Project name',
     },
     description: {
+      when: 'isNotTest',
       type: 'string',
       required: false,
       message: 'Project description',
       default: 'A Vue.js project',
     },
     author: {
+      when: 'isNotTest',
       type: 'string',
       message: 'Author',
     },
     projectType: {
+      when: 'isNotTest',
       type: 'list',
       message: 'Project type',
       choices: [
@@ -59,6 +72,7 @@ module.exports = {
       ]
     },
     build: {
+      when: 'isNotTest',
       type: 'list',
       message: 'Vue build',
       choices: [
@@ -76,10 +90,12 @@ module.exports = {
       ],
     },
     router: {
+      when: 'isNotTest',
       type: 'confirm',
       message: 'Install vue-router?',
     },
     sfcExternals: {
+      when: 'isNotTest',
       type: 'checkbox',
       message: 'Which tag do you want to externalize as standalone file from Single File Components ?',
       choices: [
@@ -101,31 +117,34 @@ module.exports = {
       ]
     },
     classStyle: {
+      when: 'isNotTest',
       type: 'confirm',
       message: 'Use Class-Style Components (vue-class-component + vue-property-decorators)?',
     },
     compiler: {
+      when: 'isNotTest',
       type: 'list',
       message: 'Which language do you want to use?',
       choices: [
+        {
+          name: 'ES2015 (babel)',
+          value: 'es2015',
+          short: 'es2015'
+        },
         {
           name: 'TypeScript (ts-loader + babel)',
           value: 'typescript',
           short: 'typescript'
         },
-        {
-          name: 'ES2015 (babel)',
-          value: 'es2015',
-          short: 'es2015'
-        }
       ]
     },
     lint: {
+      when: 'isNotTest',
       type: 'confirm',
       message: 'Use ESLint to lint your JavaScript code?',
     },
     lintConfig: {
-      when: 'lint',
+      when: 'isNotTest && lint',
       type: 'list',
       message: 'Pick an ESLint preset',
       choices: [
@@ -147,12 +166,12 @@ module.exports = {
       ]
     },
     tslint: {
-      when: 'compiler == \'typescript\'',
+      when: 'isNotTest && compiler == \'typescript\'',
       type: 'confirm',
       message: 'Use TSLint to lint your TypeScript code?'
     },
     tslintConfig: {
-      when: 'tslint',
+      when: 'isNotTest && tslint',
       type: 'list',
       message: 'Pick a TSLint preset',
       choices: [
@@ -174,11 +193,12 @@ module.exports = {
       ],
     },
     unit: {
+      when: 'isNotTest',
       type: 'confirm',
       message: 'Set up unit tests',
     },
     runner: {
-      when: 'unit',
+      when: 'isNotTest && unit',
       type: 'list',
       message: 'Pick a test runner',
       choices: [
@@ -200,10 +220,12 @@ module.exports = {
       ],
     },
     e2e: {
+      when: 'isNotTest',
       type: 'confirm',
       message: 'Setup e2e tests with Nightwatch?',
     },
     autoInstall: {
+      when: 'isNotTest',
       type: 'list',
       message:
         'Should we run `npm install` for you after the project has been created? (recommended)',
@@ -271,5 +293,4 @@ module.exports = {
       printMessage(data, chalk)
     }
   },
-  "metalsmith": metalsmith
-};
+}

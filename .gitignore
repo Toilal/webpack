@@ -1,6 +1,4 @@
 node_modules
 .DS_Store
 docs/_book
-tests/**/
-/yarn.lock
-/package-lock.json
+test/

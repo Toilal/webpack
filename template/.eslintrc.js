@@ -3,8 +3,7 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module'
+    parser: 'babel-eslint'
   },
   env: {
     browser: true,
@@ -13,7 +12,7 @@ module.exports = {
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential', 
+    'plugin:vue/essential',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
     'standard'
   ],
@@ -51,7 +50,8 @@ module.exports = {
     {{#if_eq lintConfig "airbnb"}}
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
-      js: 'never'
+      js: 'never',
+      vue: 'never'
     }],
     // disallow reassignment of function parameters
     // disallow parameter object manipulation except for specific exclusions

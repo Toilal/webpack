@@ -20,7 +20,7 @@ module.exports = merge(prodEnv, {
 
 // config/test.env.js
 module.exports = merge(devEnv, {
-  NODE_ENV: '"test"'
+  NODE_ENV: '"testing"'
 })
 ```
 

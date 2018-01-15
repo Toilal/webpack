@@ -1,0 +1,18 @@
+{ 
+  "noEscape": true,
+  "name": "test",
+  "description": "A Vue.js project",
+  "author": "CircleCI",
+  "projectType": "app",
+  "build": "standalone",
+  "router": false,
+  "sfcExternals": [],
+  "classStyle": false,
+  "compiler": "es2015",
+  "lint": true,
+  "lintConfig": "airbnb",
+  "unit": true,
+  "runner": "karma",
+  "e2e": true,
+  "autoInstall": false
+}

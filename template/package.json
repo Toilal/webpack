@@ -21,7 +21,7 @@
     "test": "{{#unit}}npm run unit{{/unit}}{{#unit}}{{#e2e}} && {{/e2e}}{{/unit}}{{#e2e}}npm run e2e{{/e2e}}",
     {{/if_or}}
     {{#lint}}
-    "lint": "eslint --ext .js{{#if_eq compiler "es2015"}},.vue{{/if_eq}} src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",{{/lint}}{{#tslint}}
+    "lint": "eslint --ext .js{{#if_eq compiler "es2015"}},.vue{{/if_eq}} src{{#unit}} test/unit{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",{{/lint}}{{#tslint}}
     "tslint": "tslint -p . -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts'{{#unit}} 'test/unit/**/*.ts'{{/unit}}{{#e2e}} 'test/e2e/*.ts'{{/e2e}}",{{/tslint}}
     "build": "node build/build{{#if_eq projectType "lib"}}.lib{{/if_eq}}.js{{#if_eq projectType "lib"}} && node build/build.js{{/if_eq}}"
   },
@@ -44,8 +44,8 @@
     "@types/node": "^6.0.10",
     {{/if_eq}}
     {{#lint}}
-    "babel-eslint": "^7.1.1",
-    "eslint": "^3.19.0",
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-vue": "^4.0.0",
@@ -66,7 +66,7 @@
     "babel-jest": "^21.0.2",
     "babel-plugin-dynamic-import-node": "^1.2.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "jest": "^21.2.0",
+    "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
     "vue-jest": "^1.0.2",
     {{/if_eq}}
