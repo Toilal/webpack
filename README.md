@@ -1,4 +1,4 @@
-# vue-webpack-boilerplate
+# vue-webpack-boilerplate [![Build Status](https://circleci.com/gh/Toilal/vue-webpack-template.png?circle-token=243071a75fa602982fdf64b891631d0670c3430c)](https://circleci.com/gh/Toilal/vue-webpack-template)
 
 > A full-featured Webpack setup with hot-reload, lint-on-save, unit testing & css extraction.
 
