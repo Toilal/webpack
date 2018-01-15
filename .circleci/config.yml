@@ -25,8 +25,17 @@ jobs:
           name: Rollout full scenario
           command: VUE_TEMPL_TEST=full node_modules/.bin/vue init . test-full
       - run:
+          name: Rollout full-class scenario
+          command: VUE_TEMPL_TEST=full-class node_modules/.bin/vue init . test-full-class
+      - run:
           name: Rollout full-karma-airbnb scenario
           command: VUE_TEMPL_TEST=full-karma-airbnb node_modules/.bin/vue init . test-full-karma-airbnb
+      - run:
+          name: Rollout full-typescript scenario
+          command: VUE_TEMPL_TEST=full-typescript node_modules/.bin/vue init . test-full-typescript
+      - run:
+          name: Rollout full-typescript-class scenario
+          command: VUE_TEMPL_TEST=full-typescript-class node_modules/.bin/vue init . test-full-typescript-class
       - persist_to_workspace:
           root: ~/project/webpack-template
           paths:
@@ -87,6 +96,39 @@ jobs:
           command: npm run build
           when: always
 
+  scenario_full_class:
+    <<: *vm_settings
+    working_directory: ~/project/webpack-template/test-full-class
+    environment:
+      - VUE_TEMPL_TEST: full-class
+    steps:
+      - attach_workspace:
+          at: '~/project/webpack-template'
+      - restore_cache:
+          key: template-cache-full-class-{{ checksum "package.json" }}
+      - run:
+          name: Install npm dependencies
+          command: npm install
+      - save_cache:
+          key: template-cache-full-class-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Run Lint
+          command: npm run lint -- --fix
+      - run:
+          name: Run Unit tests
+          command: npm run unit
+          when: always
+      - run:
+          name: Run e2e tests
+          command: npm run e2e
+          when: always
+      - run:
+          name: Test build
+          command: npm run build
+          when: always
+
   scenario_full-karma-airbnb:
     <<: *vm_settings
     working_directory: ~/project/webpack-template/test-full-karma-airbnb
@@ -119,6 +161,72 @@ jobs:
           name: Test build
           command: npm run build
           when: always
+          
+  scenario_full-typescript:
+    <<: *vm_settings
+    working_directory: ~/project/webpack-template/test-full-typescript
+    environment:
+      - VUE_TEMPL_TEST: full-typescript
+    steps:
+      - attach_workspace:
+          at: '~/project/webpack-template'
+      - restore_cache:
+          key: template-cache-full-typescript-{{ checksum "package.json" }}
+      - run:
+          name: Install npm dependencies
+          command: npm install
+      - save_cache:
+          key: template-cache-full-typescript-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Run Lint
+          command: npm run lint -- --fix
+      - run:
+          name: Run Unit tests
+          command: npm run unit
+          when: always
+      - run:
+          name: Run e2e tests
+          command: npm run e2e
+          when: always
+      - run:
+          name: Test build
+          command: npm run build
+          when: always
+          
+  scenario_full-typescript-class:
+    <<: *vm_settings
+    working_directory: ~/project/webpack-template/test-full-typescript-class
+    environment:
+      - VUE_TEMPL_TEST: full-typescript-class
+    steps:
+      - attach_workspace:
+          at: '~/project/webpack-template'
+      - restore_cache:
+          key: template-cache-full-typescript-class-{{ checksum "package.json" }}
+      - run:
+          name: Install npm dependencies
+          command: npm install
+      - save_cache:
+          key: template-cache-full-typescript-class-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Run Lint
+          command: npm run lint -- --fix
+      - run:
+          name: Run Unit tests
+          command: npm run unit
+          when: always
+      - run:
+          name: Run e2e tests
+          command: npm run e2e
+          when: always
+      - run:
+          name: Test build
+          command: npm run build
+          when: always
 
 
 workflows:
@@ -132,6 +240,15 @@ workflows:
       - scenario_full:
           requires:
             - install_template_deps
+      - scenario_full_class:
+          requires:
+            - install_template_deps
       - scenario_full-karma-airbnb:
+          requires:
+            - install_template_deps
+      - scenario_full-typescript:
+          requires:
+            - install_template_deps
+      - scenario_full-typescript-class:
           requires:
             - install_template_deps

@@ -170,7 +170,7 @@ module.exports = {
       message: 'Use TSLint to lint your TypeScript code?'
     },
     tslintConfig: {
-      when: 'tslint',
+      when: 'isNotTest && tslint',
       type: 'list',
       message: 'Pick a TSLint preset',
       choices: [
