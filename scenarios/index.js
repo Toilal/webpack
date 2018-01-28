@@ -1,10 +1,10 @@
 const scenarios = [
   'full',
-  'full-class',
   'full-karma-airbnb',
+  'minimal',
+  'full-class',
   'full-typescript',
-  'full-typescript-class',
-  'minimal'
+  'full-typescript-class'
 ]
 
 const index = scenarios.indexOf(process.env.VUE_TEMPL_TEST)

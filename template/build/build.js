@@ -22,7 +22,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
     process.stdout.write(stats.toString({
       colors: true,
       modules: false,
-      children: {{#if_eq compiler "typescript"}}true{{else}}false{{/if_eq}},
+      children: {{#if_eq compiler "typescript"}}true{{else}}false{{/if_eq}}, // if you are using ts-loader, setting this to true will make typescript errors show up during build
       chunks: false,
       chunkModules: false
     }) + '\n\n')

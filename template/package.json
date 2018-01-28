@@ -21,7 +21,7 @@
     "test": "{{#unit}}npm run unit{{/unit}}{{#unit}}{{#e2e}} && {{/e2e}}{{/unit}}{{#e2e}}npm run e2e{{/e2e}}",
     {{/if_or}}
     {{#lint}}
-    "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",{{/lint}}{{#tslint}}
+    "lint": "eslint --ext .js,.vue src{{#unit}} test/unit{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",{{/lint}}{{#tslint}}
     "tslint": "tslint -p . -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts'{{#unit}} 'test/unit/**/*.ts'{{/unit}}{{#e2e}} 'test/e2e/*.ts'{{/e2e}}",{{/tslint}}
     "build": "node build/build{{#if_eq projectType "lib"}}.lib{{/if_eq}}.js{{#if_eq projectType "lib"}} && node build/build.js{{/if_eq}}"
   },
@@ -116,7 +116,6 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
-    "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",

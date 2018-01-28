@@ -91,10 +91,6 @@ module.exports = {
       },
       {{/if_eq}}
       {
-        test: /\.html?$/,
-        loader: 'raw-loader' // Required for karma test runner
-      },
-      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {

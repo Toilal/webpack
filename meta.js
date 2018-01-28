@@ -33,7 +33,7 @@ module.exports = {
       return templateVersion
     },
   },
-  
+
   prompts: {
     name: {
       when: 'isNotTest',
@@ -91,7 +91,7 @@ module.exports = {
     router: {
       when: 'isNotTest',
       type: 'confirm',
-      message: 'Install vue-router?'
+      message: 'Install vue-router?',
     },
     sfcExternals: {
       when: 'isNotTest',
@@ -182,19 +182,19 @@ module.exports = {
         {
           name: 'AirBNB (https://github.com/progre/tslint-config-airbnb)',
           value: 'airbnb',
-          short: 'AirBNB'
+          short: 'Airbnb',
         },
         {
           name: 'none (configure it yourself)',
           value: 'none',
-          short: 'none'
-        }
-      ]
+          short: 'none',
+        },
+      ],
     },
     unit: {
       when: 'isNotTest',
       type: 'confirm',
-      message: 'Set up unit tests'
+      message: 'Set up unit tests',
     },
     runner: {
       when: 'isNotTest && unit',

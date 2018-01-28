@@ -40,7 +40,7 @@ import HelloWorld from './components/HelloWorld'
 export default class App extends Vue {
 
 }{{else}}export default {
-  name: 'app'{{#router}}{{else}},
+  name: 'App'{{#router}}{{else}},
   components: { HelloWorld }{{/router}}
 }{{/classStyle}}
 </script>{{/if_eq}}
