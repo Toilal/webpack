@@ -67,7 +67,7 @@ module.exports = function (metalsmith, opts, helpers) {
 
           const externalFilename = vueBaseName.replace(/vue$/, ext)
 
-          const replacedText = text.replace(regex, '$1 src="./' + externalFilename + '"$4\n$6')
+          const replacedText = text.replace(regex, '$1$2 src="./' + externalFilename + '"$4\n$6')
 
           const vueContent = Buffer.from(replacedText, 'utf8')
           vueFile.contents = vueContent
